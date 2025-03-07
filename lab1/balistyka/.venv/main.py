@@ -3,12 +3,14 @@ import os
 from math import sin, cos, radians
 from time import sleep
 
+# blok deklaracji "stałych"
 GRAVITY = 9.81
 DISTANCE = 40
 RADIUS = 0.3
 ROWS = 24
 COLS = 80
 
+# funkcje
 def calculate_impact(velocity, angle):
     return velocity**2 * sin(2 * radians(angle)) / GRAVITY
 
@@ -25,7 +27,7 @@ def shoot(position, velocity, angle):
     return abs(impact_pos - position) < RADIUS
 
 def draw_scene(x, y):
-    for _ in range(y-1):
+    for _ in range(y-1): # od 0 do y-2
         print()
     for _ in range(x-1):
         print(" ", end="")
@@ -38,8 +40,10 @@ def draw_scene(x, y):
 def draw_scene_adjusted(x,y):
     aspect_ratio = COLS/ROWS
     new_x = x * aspect_ratio
-    new_y = (ROWS * 2 - y * aspect_ratio) / 2
+    # new_y = (ROWS * 2 - y * aspect_ratio) / 2
+    new_y = ROWS - (y * aspect_ratio / 2)
     draw_scene(int(new_x),int(new_y))
+    # draw_scene(round(new_x),round(new_y))
 
 def animated_shot(velocity, angle):
     t_max = 2 * velocity * sin(radians(angle)) / GRAVITY
@@ -53,6 +57,7 @@ def animated_shot(velocity, angle):
         draw_scene_adjusted(x,y)
         t+= dt
         sleep(dt)
+        clear()
 
 def clear():
     os.system("clear")
