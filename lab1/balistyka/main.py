@@ -1,6 +1,6 @@
 #import math
-import os
-from math import sin, cos, radians
+import os                               # import całego modułu
+from math import sin, cos, radians      # imoporty poszczególnych funkcji z modułów
 from time import sleep
 
 # blok deklaracji "stałych"
@@ -12,25 +12,25 @@ COLS = 80
 
 # funkcje
 def calculate_impact(velocity, angle):
-    return velocity**2 * sin(2 * radians(angle)) / GRAVITY
+    return velocity**2 * sin(2 * radians(angle)) / GRAVITY      # ** to podnoszenie do potęgi
 
 def get_input():
-    velocity = float(input("Podaj prędkość "))
-    angle = None
+    velocity = float(input("Podaj prędkość "))      # input zwraca stringa, przed przypisaniem do zmiennej potrzebna jest zatem konwersja
+    angle = None                                    # None - słowo kluczowe reprezentujące brak wartości, taki placeholder zanim zmienna dostanie właściwą wartość
     while not angle or not 0 <= angle <= 90:
         angle = float(input("Podaj kąt "))
-    return velocity, angle
+    return velocity, angle                          # funkcja zwraca dwie rzeczy
 
 def shoot(position, velocity, angle):
     impact_pos = calculate_impact(velocity, angle)
     print(impact_pos)
-    return abs(impact_pos - position) < RADIUS
+    return abs(impact_pos - position) < RADIUS      # tu zwracany jest bool
 
 def draw_scene(x, y):
-    for _ in range(y-1): # od 0 do y-2
-        print()
+    for _ in range(y-1):                            # ta pętla idzie od 0 do y-2
+        print()                                     # przez _ oznaczamy zmienną tymczasową, której wartość nie jest używana
     for _ in range(x-1):
-        print(" ", end="")
+        print(" ", end="")                          # end="" zapobiega przejściu do nowej linii po print, zastępując domyślny \n czymś innym (lub niczym jak tutaj)
     print("o")
     for _ in range(y+1, ROWS-1):
         print()
@@ -55,7 +55,7 @@ def animated_shot(velocity, angle):
         x = v_x * t
         y = v_y * t - (GRAVITY * t**2) / 2
         draw_scene_adjusted(x,y)
-        t+= dt
+        t += dt
         sleep(dt)
         clear()
 
@@ -65,7 +65,7 @@ def clear():
 def main():
     turn = 1
     while True:
-        print(f"Gracz {turn}")
+        print(f"Gracz {turn}")                      # formatowanie drukowanego napisu za pomocą f-stringa
         velocity, angle = get_input()
         animated_shot(velocity, angle)
         if turn == 1:
@@ -79,6 +79,6 @@ def main():
 
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == '__main__':                          # sprawdza, czy skrypt jest importowany jako moduł, czy uruchamiany bezpośrednio
+    main()                                          # jeśli plik jest importowany, kod wewnątrz if się nie wykona
     #draw_scene_adjusted(10,10)

@@ -1,5 +1,5 @@
 import curses
-#moduł curses, który służy do tworzenia interaktywnych aplikacji tekstowych w terminalu
+# moduł curses, który służy do tworzenia interaktywnych aplikacji tekstowych w terminalu
 
 def main(stdscr):
     curses.curs_set(0)
@@ -18,7 +18,7 @@ def main(stdscr):
     # wyczyszczenie ekranu
 
     stdscr.addstr(5, 10, f"* {height}x{width} *")
-    # zapisanie stringa z przeciego argumentu na kordach (10, 5)
+    # zapisanie stringa z trzeciego argumentu na kordach (10, 5)
     # x i y są w curses zawsze zamienione!
     # funkcja nadpisuje wszystko, co było wcześniej w danym miejscu
 
