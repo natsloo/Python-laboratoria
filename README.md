@@ -2,7 +2,7 @@
 
 [dokumentacja Python](https://docs.python.org/3/index.html)
 
-[dokumentacja QWidget](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/index.html#module-PySide6.QtWidgets)
+[dokumentacja QtWidgets](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/index.html#module-PySide6.QtWidgets)
 
 [Qt Tutorials](https://doc.qt.io/qtforpython-6/tutorials/index.html)
 
