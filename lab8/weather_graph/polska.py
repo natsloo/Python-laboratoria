@@ -34,8 +34,8 @@ class PolandMap:
 
     # główna metoda do rysowania wykresów
     def draw(self):
-        fig, (map_ax, temp_ax) = plt.subplots(2, 1, figsize=(8,12))         # stworzenie dwóch wykresów: mapy i temperatury
-        self.fig = fig
+        fig, (map_ax, temp_ax) = plt.subplots(2, 1, figsize=(8,12))         # metoda subplots zwraca fig(obiekt główny) i wykres lub tablicę wykresów, którą można rozpakować jako krotkę
+        self.fig = fig                                                      # subplots(nr_rows,nr_cols)
         self.temp_ax = temp_ax
         self.map_ax = map_ax
         self.poland.plot(ax=map_ax, color='lightgrey', edgecolor='black')   # narysowanie mapy Polski
@@ -48,10 +48,10 @@ class PolandMap:
 
     # metoda do zaznaczania kropek miast
     def draw_cities(self, ax, data, fig):
-        x = [city[2] for city in cities]                                    # pobranie koordynatów miast
+        x = [city[2] for city in cities]                                    # tworzenie lisy długości i szerokości geograficznych dla wszystkich miast
         y = [city[1] for city in cities]
         c = [entry["hourly"]["temperature_2m"][0] for entry in data]        # pobranie temperatury dla danego miasta
-        plot = ax.scatter(x, y, c=c, cmap="Spectral_r")                     # zmapowanie temperatury na kolor punktów
+        plot = ax.scatter(x, y, c=c, cmap="Spectral_r")                     # metoda scatter tworzy wykres punktowy i mapuje temperatury na kolor punktów
         fig.colorbar(plot, ax=ax, label="C")                                # legenda kolorów
 
     # metoda do rysowania etykiet z nazwą miasta i temperaturą
@@ -65,7 +65,7 @@ class PolandMap:
         start_date = datetime.now().date()                                  # wybór przedziału czasu do zapytania
         end_date = start_date + timedelta(days=7)
 
-        latitude = ",".join([str(city[1]) for city in cities])              # współrzędne geograficzne do zapytania odpowiednio sformatowane
+        latitude = ",".join([str(city[1]) for city in cities])              # tworzy ciągi z szerokościami i długościami geograficznymi wszystkich miast (oddzielone przecinkami)
         longitude = ",".join([str(city[2]) for city in cities])
 
         url = (                                                             # format urla z parametrami
@@ -77,7 +77,7 @@ class PolandMap:
         )
 
         response = requests.get(url)                                        # wysłanie zapytania pod podany url
-        data = response.json()
+        data = response.json()                                              # konwertuje odpowiedź z JSON na słownik Pythona
         for i in range(len(cities)):                                        # wyświetlenie w konsoli danych
             print(cities[i][0], data[i]["hourly"]["temperature_2m"][0])
         return data                                                         # zwrot danych
