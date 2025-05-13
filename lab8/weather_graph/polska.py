@@ -84,6 +84,7 @@ class PolandMap:
 
     # metoda do rysowania wykresu godzinowego temperatury dla wybranego miasta
     def draw_temperature_plot(self, ax, data):
+        #ax.clear()
         format = "%Y-%m-%dT%H:%M"                                           # ustalenie formatu daty i czasu z danych z API do wykresu
         hourly = data[self.active_index]["hourly"]                          # pobranie danych godzinowych temperatury dla aktualnie wybranego miasta (active_index)
         hours = [datetime.strptime(i, format) for i in hourly["time"]]      # konwersja ciągów znaków z godzinami na obiekty datetime dla osi X wykresu
