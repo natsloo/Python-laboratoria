@@ -34,7 +34,7 @@ def ex4():
 
 def ex5(img, bri, con):
     fig, (ax1,ax2) = plt.subplots(1,2)      # tworzymy 1 wiersz i 2 kolumny wykresów
-    img2 = np.clip((img+bri)*con, 0, 255)   # modyfikujemy jasność i kontrast + przycinamy wartości
+    img2 = np.clip(img.astype(np.float32)*con + bri, 0, 255).astype(np.uint8)   # modyfikujemy jasność i kontrast + przycinamy wartości
     ax1.imshow(img)
     ax2.imshow(img2)
     #matplotlib.colors.Normalize(vmin=0, vmax=255)
